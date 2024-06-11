@@ -1,0 +1,128 @@
+﻿@model IEnumerable<kiemketaisan.Models.TaiSan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var stt = 0;
+}
+
+<h2>
+    Kiểm kê tài sản @(ViewBag.tenphong==""?"":"phòng") @ViewBag.tenphong
+</h2>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom:10px">
+                        <form action="/TaiSans/Index" method="get">
+                            <input placeholder="Nhập từ khóa tìm kiếm" name="search" value="@Request["search"]" class="form-control" style="margin-bottom:10px" />
+                            <input hidden name="IdPB" value="@ViewBag.IdPB" />
+                            <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                            @if (ViewBag.IdPB != 0)
+                            {
+                                <a href="@Url.Action("Create", "TaiSans", new {IdPB=ViewBag.IdPB})" class="btn btn-primary">Thêm mới</a> @Html.Raw(" ")
+
+                            }
+                            @if (Session["PQ"].ToString() == "1")
+                            {
+                                <a href="@Url.Action("ExportExcel", "TaiSans")" class="btn btn-success">Xuất file</a>
+                            }
+                        </form>
+                    </div>
+                </div>
+             
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr style="text-align:center">
+                            <th rowspan="2" style="text-align:center">STT</th>
+                            <th rowspan="2" style="text-align:center">
+                                Tên tài sản cố định
+                            </th>
+                            <th rowspan="2" style="text-align:center">
+                                Nơi sử dụng
+                            </th>
+                            <th rowspan="2" style="text-align:center">
+                                Năm đưa vào sử dụng
+                            </th>
+                            <th rowspan="2" style="text-align:center">
+                                Số thực tế kiểm kê
+                            </th>
+                            <th rowspan="2" style="text-align:center">
+                                Số theo sổ kế toán
+                            </th>
+                            <th style="text-align:center" colspan="2">Chênh lệch</th>
+
+                            <th rowspan="2" style="text-align:center">
+                                Nguyên giá (ĐVT: 1.000đ)
+                            </th>
+                            <th colspan="3" style="text-align:center">
+                                Tình trạng thiết bị
+                            </th>
+                            <th rowspan="2" style="text-align:center">Ghi chú</th>
+                            <th rowspan="2" style="text-align:center">Thao tác</th>
+
+                        </tr>
+                        <tr style="text-align:center">
+                            <th style="text-align:center">Số lượng</th>
+                            <th style="text-align:center">Nguyên nhân</th>
+
+                            <th style="text-align:center">Đang hoạt động</th>
+                            <th style="text-align:center">Đang hư hỏng</th>
+                            <th style="text-align:center">Chưa sử dụng</th>
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            stt++;
+                            <tr class="text-center">
+                                <td>@stt</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenTS)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NoiSuDung)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NamDVSD)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoKiemKeTT)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoTheoKeToan)
+                                </td>
+                                <td>@(item.SoTheoKeToan-item.SoKiemKeTT)</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NguyenNhan)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gia)
+                                </td>
+                                <td>
+                                    @(item.TinhTrang==1?"X":"")
+                                </td>
+                                <td>
+                                    @(item.TinhTrang==2?"X":"")
+                                </td>
+                                <td>
+                                    @(item.TinhTrang==3?"X":"")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GhiChu)
+                                </td>
+                                <td style="display:flex">
+
+                                    <a href="@Url.Action("Edit", "TaiSans", new { id = item.Id })" class="btn btn-success">Sửa</a> @Html.Raw(" ")
+                                    @if (Session["PQ"].ToString() == "1")
+                                    {
+                                        <a href="@Url.Action("Delete", "TaiSans", new { id = item.Id })" class="btn btn-danger" style="margin-left:10px">Xóa</a>
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+                </div>
+</div></div></div>

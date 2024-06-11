@@ -1,0 +1,63 @@
+﻿@model IEnumerable<kiemketaisan.Models.PhongBan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var stt = 0;
+}
+
+<h2>
+    Danh sách phòng ban
+</h2>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12" style="margin-bottom:10px">
+                        <form action="/PhongBan/Index" method="get">
+                            <input placeholder="Nhập từ khóa tìm kiếm" name="search" value="@Request["search"]" class="form-control" style="margin-bottom:10px" />
+                            <button type="submit" class="btn btn-success">Tìm kiếm</button>
+
+                            <a href="@Url.Action("Create", "PhongBan")" class="btn btn-primary">Thêm mới</a> @Html.Raw(" ")
+                        </form>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr style="text-align:center">
+                            <th  style="text-align:center">STT</th>
+                            <th style="text-align:center">
+                                Tên phòng ban
+                            </th>
+                            @if (Session["PQ"].ToString() == "1")
+                            {
+                                <th  style="text-align:center">Thao tác</th>
+                            }
+                        </tr>
+                        @foreach (var item in Model)
+                        {
+                            stt++;
+                            <tr class="text-center">
+                                <td>@stt</td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenPhongBan)
+                                </td>
+                                <td style="display:flex;justify-content:center">
+
+                                    <a href="@Url.Action("Index", "TaiSans", new { IdPB = item.Id })" class="btn btn-success">Quản lý</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="@Url.Action("Edit", "PhongBan", new { id = item.Id })" class="btn btn-success">Sửa</a> @Html.Raw(" ")
+                                    <a href="@Url.Action("Delete", "PhongBan", new { id = item.Id })" class="btn btn-danger" style="margin-left:10px">Xóa</a>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

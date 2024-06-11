@@ -1,0 +1,68 @@
+﻿@model IEnumerable<kiemketaisan.Models.ThongTin>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var stt = 0;
+    var phong = ViewData["phong"] as List<kiemketaisan.Models.PhongBan>;
+}
+
+<h2>
+    Danh sách nhân viên
+</h2>
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <p>
+                    <a href="@Url.Action("Create","NhanVien")" class="btn btn-primary">Thêm mới</a>&nbsp;
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr class="text-center">
+                                <th>STT</th>
+                                <th>Họ và tên</th>
+                                <th>Ảnh</th>
+                                <th> Giới tính </th>
+                                <th>Ngày sinh</th>
+                                <th>Email</th>
+                                <th>Địa chỉ</th>
+                                @if (Session["PQ"].ToString() == "1")
+                                {<th>
+                                Phòng ban
+                                </th>
+                                }
+                                    <th> Thao tác </th>
+                                </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            stt++;
+                            <tr class="text-center">
+                                <td>@stt</td>
+                                <td>@item.HoTen</td>
+                                <td><img src="~/upload/@item.HinhAnh" height="200" width="200"></td>
+                                <td>@(item.GioiTinh==1?"Nam":"Nữ")</td>
+                                <td>@item.NgaySinh.Value.ToString("dd/MM/yyyy")</td>
+                                <td>@item.Email</td>
+                                <td>@item.DiaChi</td>
+                                @if (Session["PQ"].ToString() == "1")
+                                {
+                                    <td>
+                                        @phong.FirstOrDefault(g=>g.Id==item.IdPB).TenPhongBan
+                                    </td>
+                                }
+                                <td>
+                                    <a href="@Url.Action("Edit","NhanVien",new {id=item.Id})" class="btn btn-success">Sửa</a> &nbsp;
+                                    <a href="@Url.Action("Delete","NhanVien",new {id=item.Id})" class="btn btn-danger">Xóa</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

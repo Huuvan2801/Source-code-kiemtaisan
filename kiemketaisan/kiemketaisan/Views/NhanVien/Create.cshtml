@@ -1,0 +1,109 @@
+﻿@model kiemketaisan.Models.ThongTin
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var phong = ViewData["phong"] as List<kiemketaisan.Models.PhongBan>;
+}
+
+<h2>Thêm nhân viên mới</h2>
+
+@using (Html.BeginForm("Create", "NhanVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Thông tin nhân viên</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="control-label col-md-2">Họ và tên</div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Email</div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Giới tính</div>
+        <div class="col-md-10">
+            <select class="form-control" name="GioiTinh">
+                <option value="1">Nam</option>
+                <option value="0">Nữ</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Ngày sinh</div>
+        <div class="col-md-10">
+            <input class="form-control" name="NgaySinh" type="date" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Địa chỉ</div>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="control-label col-md-2">Hình ảnh</div>
+        <div class="col-md-10">
+            <input type="file" name="Anh" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Tên đăng nhập</div>
+        <div class="col-md-10">
+            <input class="form-control" name="tendangnhap" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Mật khẩu</div>
+        <div class="col-md-10">
+            <input class="form-control" name="matkhau" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Phân quyền</div>
+        <div class="col-md-10">
+            <select class="form-control" name="phanquyen">
+                <option value="1">Quản trị viên</option>
+                <option value="2">Nhân viên</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="control-label col-md-2">Phòng ban</div>
+        <div class="col-md-10">
+            <select class="form-control" name="IdPB">
+                @foreach(var item in phong)
+                {
+                    <option value="@item.Id">@item.TenPhongBan</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-1">
+                <input type="submit" value="Thêm mới" class="btn btn-success" />
+            </div>
+            <div class="col-md-2">
+                <a href="@Url.Action("Index","NhanVien")" style="margin-left:10px" class="btn btn-primary">Trở lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+}

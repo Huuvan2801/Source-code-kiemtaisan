@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KiemKeModelStoreContainer" CdmEntityContainer="Data">
+    <EntitySetMapping Name="PhongBans">
+      <EntityTypeMapping TypeName="KiemKeModel.PhongBan">
+        <MappingFragment StoreEntitySet="PhongBan">
+          <ScalarProperty Name="TenPhongBan" ColumnName="TenPhongBan" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ThongTins">
+      <EntityTypeMapping TypeName="KiemKeModel.ThongTin">
+        <MappingFragment StoreEntitySet="ThongTin">
+          <ScalarProperty Name="IdPB" ColumnName="IdPB" />
+          <ScalarProperty Name="IdTK" ColumnName="IdTK" />
+          <ScalarProperty Name="HinhAnh" ColumnName="HinhAnh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaiSans">
+      <EntityTypeMapping TypeName="KiemKeModel.TaiSan">
+        <MappingFragment StoreEntitySet="TaiSan">
+          <ScalarProperty Name="IdPB" ColumnName="IdPB" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
+          <ScalarProperty Name="NguyenNhan" ColumnName="NguyenNhan" />
+          <ScalarProperty Name="SoTheoKeToan" ColumnName="SoTheoKeToan" />
+          <ScalarProperty Name="SoKiemKeTT" ColumnName="SoKiemKeTT" />
+          <ScalarProperty Name="NamDVSD" ColumnName="NamDVSD" />
+          <ScalarProperty Name="NoiSuDung" ColumnName="NoiSuDung" />
+          <ScalarProperty Name="TenTS" ColumnName="TenTS" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TaiKhoans">
+      <EntityTypeMapping TypeName="KiemKeModel.TaiKhoan">
+        <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="PhanQuyen" ColumnName="PhanQuyen" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="TenDangNhap" ColumnName="TenDangNhap" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
